@@ -129,5 +129,6 @@ commands.each do |command|
 	command.sub! '$username', username
 
 	puts 'dscl . ' + command
+	`dscl . #{command}`
 end
 
