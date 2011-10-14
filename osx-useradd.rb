@@ -41,8 +41,9 @@ OptionParser.new do |opts|
 	end
 
 	opts.on('-G', '--groups GROUP1[,GROUP2,...[,GROUPN]]', Array) do |groups|
-		puts '-G not yet implemented.'
-		exit 1
+		groups.each do |group|
+			commands << "-append /Groups/#{group} GroupMembership $username"
+		end
 	end
 
 	opts.on('-k', '--skel SKEL_DIR') do |skelDir|
