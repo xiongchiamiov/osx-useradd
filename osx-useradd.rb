@@ -37,8 +37,7 @@ OptionParser.new do |opts|
 	end
 
 	opts.on('-g', '--gid GROUP') do |group|
-		puts '-g not yet implemented.'
-		exit 1
+		commands << "-create $homeDirectory PrimaryGroupID #{group}"
 	end
 
 	opts.on('-G', '--groups GROUP1[,GROUP2,...[,GROUPN]]', Array) do |groups|
