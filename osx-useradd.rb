@@ -96,6 +96,11 @@ OptionParser.new do |opts|
 	end
 
 	opts.on('-u', '--uid UID') do |uid|
+		`id #{uid} 2> /dev/null`
+		if $?.exitstatus == 0
+			puts 'Non-unique UID.'
+			exit 2
+		end
 		commands << "-create $homeDirectory UniqueID #{uid}"
 	end
 
