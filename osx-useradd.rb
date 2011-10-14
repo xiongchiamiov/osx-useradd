@@ -92,8 +92,7 @@ OptionParser.new do |opts|
 	end
 
 	opts.on('-s', '--shell SHELL') do |shell|
-		puts '-s not yet implemented.'
-		exit 1
+		commands << "-create $homeDirectory UserShell #{shell}"
 	end
 
 	opts.on('-u', '--uid UID') do |uid|
