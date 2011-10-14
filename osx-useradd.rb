@@ -96,8 +96,7 @@ OptionParser.new do |opts|
 	end
 
 	opts.on('-u', '--uid UID') do |uid|
-		puts '-u not yet implemented.'
-		exit 1
+		commands << "-create $homeDirectory UniqueID #{uid}"
 	end
 
 	opts.on('-U', '--user-group') do
