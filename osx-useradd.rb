@@ -2,6 +2,7 @@
 
 require 'optparse'
 
+commands = ['-create /Users/$username']
 OptionParser.new do |opts|
 	opts.banner = "Usage: #{$0} [options] LOGIN"
 	
@@ -110,4 +111,19 @@ OptionParser.new do |opts|
 		exit 1
 	end
 end.parse!
+
+# Since we use the destructive parse! above, we won't pick up a param here on
+# accident.
+username = ARGV[-1]
+if username.nil?
+	puts 'Fool, you gotta give me a username!'
+	exit 2
+end
+
+commands.each do |command|
+	# We didn't know the username while we were creating these.
+	command.sub '$username', username
+
+	puts 'dscl . ' + command
+end
 
