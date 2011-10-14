@@ -2,7 +2,8 @@
 
 require 'optparse'
 
-commands = ['-create /Users/$username']
+homeDirectory = '/Users/$username'
+commands = ['-create $homeDirectory']
 OptionParser.new do |opts|
 	opts.banner = "Usage: #{$0} [options] LOGIN"
 	
@@ -17,8 +18,7 @@ OptionParser.new do |opts|
 	end
 
 	opts.on('-d', '--home HOME_DIR') do |homeDir|
-		puts '-d not yet implemented.'
-		exit 1
+		homeDirectory = homeDir
 	end
 
 	opts.on('-D', '--default') do
@@ -121,8 +121,9 @@ if username.nil?
 end
 
 commands.each do |command|
+	command.sub! '$homeDirectory', homeDirectory
 	# We didn't know the username while we were creating these.
-	command.sub '$username', username
+	command.sub! '$username', username
 
 	puts 'dscl . ' + command
 end
